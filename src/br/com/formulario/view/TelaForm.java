@@ -3,7 +3,9 @@ package br.com.formulario.view;
 
 import br.com.formulario.model.Formulario;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -16,15 +18,16 @@ public class TelaForm extends javax.swing.JFrame {
         DefaultTableModel dados = (DefaultTableModel) tabela.getModel();
         dados.setNumRows(0);
         
-        for (Formulario formulario : lista){
+        lista.forEach(formulario -> {
             dados.addRow(new Object[]{
                 formulario.getNome(),
-                formulario.getSobrenome()
+                formulario.getSobrenome(),
+                formulario.getAplicacao(),
+                formulario.getSenioridade(),
+                formulario.getTecnologias()
                 
             });
-            
-        
-        }
+        });
     }
     
     public TelaForm() {
@@ -49,7 +52,7 @@ public class TelaForm extends javax.swing.JFrame {
         senioridade = new javax.swing.JLabel();
         boxSenioridade = new javax.swing.JComboBox<>();
         tecnologias = new javax.swing.JLabel();
-        bomHtml = new javax.swing.JCheckBox();
+        boxHtml = new javax.swing.JCheckBox();
         boxCss = new javax.swing.JCheckBox();
         boxJavascript = new javax.swing.JCheckBox();
         boxPhp = new javax.swing.JCheckBox();
@@ -94,6 +97,11 @@ public class TelaForm extends javax.swing.JFrame {
 
         radioFront.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radioFront.setText("Front-End");
+        radioFront.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                radioFrontMouseClicked(evt);
+            }
+        });
         radioFront.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioFrontActionPerformed(evt);
@@ -130,8 +138,13 @@ public class TelaForm extends javax.swing.JFrame {
         tecnologias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tecnologias.setText("Selecione as tecnologias que ultiliza:");
 
-        bomHtml.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        bomHtml.setText("HTML");
+        boxHtml.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        boxHtml.setText("HTML");
+        boxHtml.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxHtmlActionPerformed(evt);
+            }
+        });
 
         boxCss.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         boxCss.setText("CSS");
@@ -183,9 +196,19 @@ public class TelaForm extends javax.swing.JFrame {
 
         editar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         editar.setText("Editar");
+        editar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editarMouseClicked(evt);
+            }
+        });
 
         deletar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         deletar.setText("Deletar");
+        deletar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,7 +235,7 @@ public class TelaForm extends javax.swing.JFrame {
                                     .addComponent(sobrenome)
                                     .addComponent(campoSobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(bomHtml)
+                                .addComponent(boxHtml)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(boxCss)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -275,7 +298,7 @@ public class TelaForm extends javax.swing.JFrame {
                     .addComponent(boxPhp)
                     .addComponent(boxJava)
                     .addComponent(boxCcha)
-                    .addComponent(bomHtml))
+                    .addComponent(boxHtml))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -329,11 +352,66 @@ public class TelaForm extends javax.swing.JFrame {
         Formulario formulario = new Formulario();
         formulario.setNome (campoNome.getText());
         formulario.setSobrenome(campoSobrenome.getText());
+        formulario.setAplicacao(Arrays.deepToString(radioFront.getSelectedObjects()));
+        
+        formulario.setSenioridade(boxSenioridade.getSelectedItem().toString());  
+      
+       
         
         lista.add(formulario);
         listarTodos();
         
     }//GEN-LAST:event_salvarMouseClicked
+
+    private void radioFrontMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioFrontMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioFrontMouseClicked
+
+    private void editarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editarMouseClicked
+        // TODO add your handling code here:
+        Formulario formulario1 = new Formulario();
+        formulario1.setNome(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+        formulario1.setSobrenome(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
+        formulario1.setSenioridade(tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
+        
+        for (Formulario formulario : lista){
+            if(formulario.getNome() == formulario1.getNome()){
+                int posicao = lista.indexOf(formulario);
+                
+                Formulario dev = new Formulario();
+                dev.setNome(campoNome.getText());
+                dev.setSobrenome(campoSobrenome.getText());
+                dev.setSenioridade(boxSenioridade.getSelectedItem().toString());
+                
+                lista.set(posicao, dev);
+                JOptionPane.showMessageDialog (null, "Cadastro atualizado!");
+           
+            }
+            listarTodos();
+        
+        }
+    }//GEN-LAST:event_editarMouseClicked
+
+    private void boxHtmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxHtmlActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxHtmlActionPerformed
+
+    private void deletarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletarMouseClicked
+        // TODO add your handling code here:
+        Formulario formulario1 = new Formulario();
+        formulario1.setNome(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
+        
+        for (Formulario formulario : lista){
+            
+            if(formulario.getNome() == formulario1.getNome()){
+                lista.remove(formulario);
+                JOptionPane.showMessageDialog (null, "Excluido com sucesso!");
+                listarTodos();
+            }
+        
+        }
+        
+    }//GEN-LAST:event_deletarMouseClicked
 
     
     public static void main(String args[]) {
@@ -346,9 +424,9 @@ public class TelaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox bomHtml;
     private javax.swing.JCheckBox boxCcha;
     private javax.swing.JCheckBox boxCss;
+    private javax.swing.JCheckBox boxHtml;
     private javax.swing.JCheckBox boxJava;
     private javax.swing.JCheckBox boxJavascript;
     private javax.swing.JCheckBox boxPhp;
