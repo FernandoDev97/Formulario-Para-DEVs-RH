@@ -1,28 +1,18 @@
-
 package br.com.formulario.model;
 
+import java.util.List;
 import javax.swing.JRadioButton;
 
 public class Formulario {
-        
-       private String nome;
-       private String sobrenome;
-       private String aplicacao;
-       private String senioridade;
-       private String tecnologias;
-       
-       
 
-       public Formulario (){
-       
-       }
+    private String nome;
+    private String sobrenome;
+    private String aplicacao;
+    private String senioridade;
+    private List<String> tecnologias;
 
-    public Formulario(String nome, String sobrenome, String aplicacao, String senioridade, String tecnologias) {
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.aplicacao = aplicacao;
-        this.senioridade = senioridade;
-        this.tecnologias = tecnologias;
+    public Formulario() {
+
     }
 
     public String getNome() {
@@ -57,28 +47,16 @@ public class Formulario {
         this.senioridade = senioridade;
     }
 
-    public String getTecnologias() {
+    public List<String> getTecnologias() {
         return tecnologias;
     }
 
-    public void setTecnologias(String tecnologias) {
+    public void setTecnologias(List<String> tecnologias) {
         this.tecnologias = tecnologias;
     }
 
     public void setAplicacao(JRadioButton radioFront, JRadioButton radioBack, String toString) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-       
 
-    
-    
-    }
-
-
-   
-       
-
-       
-       
-    
-
+}

@@ -39,6 +39,7 @@ public class TelaForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        area = new javax.swing.ButtonGroup();
         titulo = new javax.swing.JLabel();
         subTitulo = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
@@ -95,6 +96,7 @@ public class TelaForm extends javax.swing.JFrame {
         ladoAplicacao.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         ladoAplicacao.setText("De qual lado da aplicação você desenvolve?");
 
+        area.add(radioFront);
         radioFront.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radioFront.setText("Front-End");
         radioFront.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -108,6 +110,7 @@ public class TelaForm extends javax.swing.JFrame {
             }
         });
 
+        area.add(radioBack);
         radioBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radioBack.setText("Back-End");
         radioBack.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +119,7 @@ public class TelaForm extends javax.swing.JFrame {
             }
         });
 
+        area.add(radioFull);
         radioFull.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         radioFull.setText("Fullstack");
         radioFull.addActionListener(new java.awt.event.ActionListener() {
@@ -352,10 +356,61 @@ public class TelaForm extends javax.swing.JFrame {
         Formulario formulario = new Formulario();
         formulario.setNome (campoNome.getText());
         formulario.setSobrenome(campoSobrenome.getText());
-        formulario.setAplicacao(Arrays.deepToString(radioFront.getSelectedObjects()));
+        formulario.setAplicacao(area.toString());
+        formulario.setSenioridade(boxSenioridade.getSelectedItem().toString());
         
-        formulario.setSenioridade(boxSenioridade.getSelectedItem().toString());  
-      
+        String radio = "";
+        
+        if(radioFront.isSelected()) {
+            radio = "FrontEnd";
+            formulario.setAplicacao(radio);
+        }else if (radioBack.isSelected()){
+             radio = "BackEnd";
+             formulario.setAplicacao(radio);
+        }else if (radioFull.isSelected()){
+             radio = "FullStack";
+             formulario.setAplicacao(radio);
+        }else {
+        JOptionPane.showMessageDialog(null, "Selecione a área");
+        }   
+        
+        String checkbox = "";
+        
+        List<String> tecnologias = new ArrayList<>();
+        
+        if (boxHtml.isSelected()){
+            checkbox = "HTML";
+            tecnologias.add(checkbox);
+        }
+        
+        if (boxCss.isSelected()){
+            checkbox = "CSS";
+            tecnologias.add(checkbox);
+        }
+        
+        if (boxJavascript.isSelected()){
+            checkbox = "JavaScript";
+            tecnologias.add(checkbox);
+        }
+        
+        if (boxPhp.isSelected()){
+            checkbox = "PHP";
+            tecnologias.add(checkbox);
+        }
+        
+        if (boxJava.isSelected()){
+            checkbox = "JAVA";
+            tecnologias.add(checkbox);
+        }
+        
+        if (boxCcha.isSelected()){
+            checkbox = "C#";
+            tecnologias.add(checkbox);
+        }
+        
+        formulario.setTecnologias(tecnologias);
+        
+        
        
         
         lista.add(formulario);
@@ -372,7 +427,11 @@ public class TelaForm extends javax.swing.JFrame {
         Formulario formulario1 = new Formulario();
         formulario1.setNome(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
         formulario1.setSobrenome(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
-        formulario1.setSenioridade(tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
+        formulario1.setAplicacao (tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
+        formulario1.setSenioridade(tabela.getValueAt(tabela.getSelectedRow(), 3).toString());
+       // List <String> tecnologias = new ArrayList<>();
+        //tecnologias.add(tabela.getValueAt(tabela.getSelectedRow(), 4).toString());
+        //formulario1.setTecnologias(tecnologias);
         
         for (Formulario formulario : lista){
             if(formulario.getNome() == formulario1.getNome()){
@@ -381,14 +440,13 @@ public class TelaForm extends javax.swing.JFrame {
                 Formulario dev = new Formulario();
                 dev.setNome(campoNome.getText());
                 dev.setSobrenome(campoSobrenome.getText());
+                dev.setAplicacao(area.toString());
                 dev.setSenioridade(boxSenioridade.getSelectedItem().toString());
-                
                 lista.set(posicao, dev);
                 JOptionPane.showMessageDialog (null, "Cadastro atualizado!");
-           
             }
+            
             listarTodos();
-        
         }
     }//GEN-LAST:event_editarMouseClicked
 
@@ -424,6 +482,7 @@ public class TelaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup area;
     private javax.swing.JCheckBox boxCcha;
     private javax.swing.JCheckBox boxCss;
     private javax.swing.JCheckBox boxHtml;
