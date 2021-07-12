@@ -1,4 +1,3 @@
-
 package br.com.formulario.view;
 
 import br.com.formulario.model.Formulario;
@@ -8,16 +7,15 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class TelaForm extends javax.swing.JFrame {
-    
+
     List<Formulario> lista = new ArrayList<>();
-   
-    public void listarTodos (){
-        
+
+    public void listarTodos() {
+
         DefaultTableModel dados = (DefaultTableModel) tabela.getModel();
         dados.setNumRows(0);
-        
+
         lista.forEach(formulario -> {
             dados.addRow(new Object[]{
                 formulario.getNome(),
@@ -25,16 +23,15 @@ public class TelaForm extends javax.swing.JFrame {
                 formulario.getAplicacao(),
                 formulario.getSenioridade(),
                 formulario.getTecnologias()
-                
+
             });
         });
     }
-    
+
     public TelaForm() {
         initComponents();
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -354,68 +351,65 @@ public class TelaForm extends javax.swing.JFrame {
 
     private void salvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salvarMouseClicked
         Formulario formulario = new Formulario();
-        formulario.setNome (campoNome.getText());
+        formulario.setNome(campoNome.getText());
         formulario.setSobrenome(campoSobrenome.getText());
         formulario.setAplicacao(area.toString());
         formulario.setSenioridade(boxSenioridade.getSelectedItem().toString());
-        
+
         String radio = "";
-        
-        if(radioFront.isSelected()) {
+
+        if (radioFront.isSelected()) {
             radio = "FrontEnd";
             formulario.setAplicacao(radio);
-        }else if (radioBack.isSelected()){
-             radio = "BackEnd";
-             formulario.setAplicacao(radio);
-        }else if (radioFull.isSelected()){
-             radio = "FullStack";
-             formulario.setAplicacao(radio);
-        }else {
-        JOptionPane.showMessageDialog(null, "Selecione a área");
-        }   
-        
+        } else if (radioBack.isSelected()) {
+            radio = "BackEnd";
+            formulario.setAplicacao(radio);
+        } else if (radioFull.isSelected()) {
+            radio = "FullStack";
+            formulario.setAplicacao(radio);
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione a área");
+        }
+
         String checkbox = "";
-        
+
         List<String> tecnologias = new ArrayList<>();
-        
-        if (boxHtml.isSelected()){
+
+        if (boxHtml.isSelected()) {
             checkbox = "HTML";
             tecnologias.add(checkbox);
         }
-        
-        if (boxCss.isSelected()){
+
+        if (boxCss.isSelected()) {
             checkbox = "CSS";
             tecnologias.add(checkbox);
         }
-        
-        if (boxJavascript.isSelected()){
+
+        if (boxJavascript.isSelected()) {
             checkbox = "JavaScript";
             tecnologias.add(checkbox);
         }
-        
-        if (boxPhp.isSelected()){
+
+        if (boxPhp.isSelected()) {
             checkbox = "PHP";
             tecnologias.add(checkbox);
         }
-        
-        if (boxJava.isSelected()){
+
+        if (boxJava.isSelected()) {
             checkbox = "JAVA";
             tecnologias.add(checkbox);
         }
-        
-        if (boxCcha.isSelected()){
+
+        if (boxCcha.isSelected()) {
             checkbox = "C#";
             tecnologias.add(checkbox);
         }
-        
+
         formulario.setTecnologias(tecnologias);
-        
-        
-       
-        
+
         lista.add(formulario);
         listarTodos();
-        
+
     }//GEN-LAST:event_salvarMouseClicked
 
     private void radioFrontMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioFrontMouseClicked
@@ -427,25 +421,77 @@ public class TelaForm extends javax.swing.JFrame {
         Formulario formulario1 = new Formulario();
         formulario1.setNome(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
         formulario1.setSobrenome(tabela.getValueAt(tabela.getSelectedRow(), 1).toString());
-        formulario1.setAplicacao (tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
+        formulario1.setAplicacao(tabela.getValueAt(tabela.getSelectedRow(), 2).toString());
         formulario1.setSenioridade(tabela.getValueAt(tabela.getSelectedRow(), 3).toString());
-       // List <String> tecnologias = new ArrayList<>();
+        // List <String> tecnologias = new ArrayList<>();
         //tecnologias.add(tabela.getValueAt(tabela.getSelectedRow(), 4).toString());
         //formulario1.setTecnologias(tecnologias);
-        
-        for (Formulario formulario : lista){
-            if(formulario.getNome() == formulario1.getNome()){
+
+        for (Formulario formulario : lista) {
+            if (formulario.getNome() == formulario1.getNome()) {
                 int posicao = lista.indexOf(formulario);
-                
+
                 Formulario dev = new Formulario();
                 dev.setNome(campoNome.getText());
                 dev.setSobrenome(campoSobrenome.getText());
-                dev.setAplicacao(area.toString());
+
+                String radio = "";
+
+                if (radioFront.isSelected()) {
+                    radio = "FrontEnd";
+                    dev.setAplicacao(radio);
+                } else if (radioBack.isSelected()) {
+                    radio = "BackEnd";
+                    dev.setAplicacao(radio);
+                } else if (radioFull.isSelected()) {
+                    radio = "FullStack";
+                    dev.setAplicacao(radio);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione a área");
+                }
+
+                String checkbox = "";
+
+                List<String> tecnologias = new ArrayList<>();
+
+                if (boxHtml.isSelected()) {
+                    checkbox = "HTML";
+                    tecnologias.add(checkbox);
+                }
+
+                if (boxCss.isSelected()) {
+                    checkbox = "CSS";
+                    tecnologias.add(checkbox);
+                }
+
+                if (boxJavascript.isSelected()) {
+                    checkbox = "JavaScript";
+                    tecnologias.add(checkbox);
+                }
+
+                if (boxPhp.isSelected()) {
+                    checkbox = "PHP";
+                    tecnologias.add(checkbox);
+                }
+
+                if (boxJava.isSelected()) {
+                    checkbox = "JAVA";
+                    tecnologias.add(checkbox);
+                }
+
+                if (boxCcha.isSelected()) {
+                    checkbox = "C#";
+                    tecnologias.add(checkbox);
+                }
+
+                dev.setTecnologias(tecnologias);
+
+                // dev.setAplicacao(area.toString());
                 dev.setSenioridade(boxSenioridade.getSelectedItem().toString());
                 lista.set(posicao, dev);
-                JOptionPane.showMessageDialog (null, "Cadastro atualizado!");
+                JOptionPane.showMessageDialog(null, "Cadastro atualizado!");
             }
-            
+
             listarTodos();
         }
     }//GEN-LAST:event_editarMouseClicked
@@ -458,22 +504,29 @@ public class TelaForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         Formulario formulario1 = new Formulario();
         formulario1.setNome(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
-        
-        for (Formulario formulario : lista){
-            
-            if(formulario.getNome() == formulario1.getNome()){
-                lista.remove(formulario);
-                JOptionPane.showMessageDialog (null, "Excluido com sucesso!");
-                listarTodos();
+
+        try {
+            for (Formulario formulario : lista) {
+
+                if (formulario.getNome() == formulario1.getNome()) {
+                    lista.remove(formulario);
+                    JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+
+                }
+
             }
-        
+            listarTodos();
+
+        } catch (Exception e) {
+
+            e.getMessage();
         }
-        
+
+
     }//GEN-LAST:event_deletarMouseClicked
 
-    
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaForm().setVisible(true);
